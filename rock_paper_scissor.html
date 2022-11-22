@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            background-image: url(images/rps_bg1.jpg);
+            background-repeat: no-repeat;
+            background-size: cover;
+            height: 100vh;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+        }
+        .main-content{
+            color: white;
+            background: transparent;
+            display: flex;
+            align-items: center;
+            width: 500px;
+            height: 60%;
+            flex-direction: column;
+            justify-items: flex-start;
+            animation-name: animate;
+            animation-duration: 1s;
+            border-radius: 10px;
+            box-shadow: 0 0 10px white;
+        }
+        .main-content .header{
+            width: 100%;
+            background-color: gray;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border-radius: 10px;
+        }
+        .options{
+            display: flex;
+            align-self: center;
+            justify-content: space-around;
+            align-items: center;
+            align-content: center;
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+        }
+        .opt{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 150px;
+            height: 150px;
+            flex-direction: column;
+            border-radius: 10px;
+            box-shadow: 0 0 10px white;
+        }
+        .opt:hover{
+            width: 175px;
+            height: 175px;
+        }
+        .opt img{
+            height: 90%;
+            width: 100%;
+        }
+        a{
+            color: white;
+            font-size: 20px;
+            text-decoration: none;
+        }
+        a:hover{
+            color: blue;
+        }
+        .results{
+            line-height: 2px;
+            width: 100%;
+        }
+        @keyframes animate{
+            0%{
+                opacity: 0;
+            }
+            100%{
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main-content">
+        <div class="header">
+        <h1>Rock Paper Scissors</h1>
+        </div>
+        <div class="options">  
+            <button class="opt" id="rock" value="rock" onclick="select(rock),maxclick()">
+                <img src="images/rock.jpg" alt="">
+                <span id="opt1">Rock</span>
+            </button>
+            <button class="opt" id="paper" value="paper" onclick="select(paper),maxclick()">
+                <img src="images/paper.png" alt="" >
+                <span id="opt2">Paper</span>
+            </button>
+            <button class="opt" id="scissor" value="scissor" onclick="select(scissor),maxclick()">
+                <img src="images/scissor.png" alt="" >
+                <span id="opt3">Scissor</span>
+            </button>
+        </div>
+        <div class="results">
+            <p id="player_choice" style="width: 100%; text-align: center;"></p>
+            <p id="computer_choice" style="width: 100%; text-align: center;"></p>
+            <p id="result" style="width: 100%; text-align: center;"></p>
+        </div>
+        <span id="sound"></span>
+        <a href="ex.html">Reset</a>
+    </div>
+    <script>
+        function select(result){
+            var res = result.value;
+            console.log(res);
+            var opt = ["rock","paper","scissor"]
+            var val = Math.floor(Math.random() * opt.length);
+            console.log(opt[val]);
+            document.getElementById("player_choice").innerHTML = `You Choose ${res}`;
+            document.getElementById("computer_choice").innerHTML = `computer Choose ${opt[val]}`;
+            if((res==="rock" && opt[val]==="scissor") || (res==="paper" && opt[val]==="rock") || (res==="scissor" && opt[val]==="paper")){
+                document.getElementById("result").innerHTML = "You win!";
+                document.getElementById("sound").innerHTML="<embed src=\""+"sound\\youwin.wav"+"\" hidden=\"true\" autostart=\"true\" loop=\"false\"/>";
+            }else if((res==="rock" && opt[val]==="rock") || (res==="paper" && opt[val]==="paper") || (res==="scissor" && opt[val]==="scissor")){
+                document.getElementById("result").innerHTML = "Game Draw";
+            }else{
+                document.getElementById("result").innerHTML = "You Loose";
+                document.getElementById("sound").innerHTML="<embed src=\""+"sound\\youlose.wav"+"\" hidden=\"true\" autostart=\"true\" loop=\"false\"/>";
+            }
+        }
+    </script>
+</body>
+
+</html>
